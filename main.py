@@ -1,9 +1,15 @@
+import sys
+
 def main():
-    with open("books/frankenstein.txt") as f:
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    with open(sys.argv[1]) as f:
         file_contents = f.read()
     #print(word_count(file_contents))
     #print(char_count(file_contents))
-    print_report("books/frankenstein.txt", word_count(file_contents), char_count(file_contents))
+    file = sys.argv[1]
+    print_report(file, word_count(file_contents), char_count(file_contents))
 
 def word_count(text):
     words = text.split()
@@ -22,12 +28,11 @@ def char_count(text):
     return result
 
 def print_report(file_name, word_count, char_count):
-    sorted_char_count = 
     print(f"--- Begin report of {file_name} ---")
     print(f"{word_count} words found in the document")
     print()
     for ch in char_count:
-        print(f"The '{ch}' character was found {char_count[ch]} times")
+        print(f"{ch}: {char_count[ch]} times")
     print("--- End report ---")
 
 main()
